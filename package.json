@@ -1,0 +1,66 @@
+{
+  "name": "toefl-ai-agent",
+  "version": "1.1.0",
+  "description": "AI Agent interaktif untuk latihan TOEFL Grammar menggunakan Groq, LangChain, dan WhatsApp Web.js",
+  "main": "src/whatsapp/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/whatsapp/index.js",
+    "dev": "nodemon src/whatsapp/index.js",
+    "agent": "node src/agent/index.js",
+    "server": "node src/server.js",
+    "test": "jest --runInBand --verbose",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "keywords": [
+    "AI Agent",
+    "LangChain",
+    "Groq",
+    "WhatsApp",
+    "TOEFL",
+    "Chatbot",
+    "RAG",
+    "Node.js"
+  ],
+  "author": "Tim TOEFL Agent",
+  "license": "MIT",
+  "dependencies": {
+    "@langchain/community": "^0.0.47",
+    "@langchain/core": "^1.0.2",
+    "@langchain/groq": "^1.0.0",
+    "chalk": "^5.3.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.19.2",
+    "faiss-node": "^0.5.1",
+    "langchain": "^0.2.17",
+    "node-fetch": "^3.3.2",
+    "openai": "^4.0.0",
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.24.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.0",
+    "prettier": "^3.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "js",
+      "json"
+    ],
+    "roots": [
+      "<rootDir>/tests"
+    ]
+  }
+}
