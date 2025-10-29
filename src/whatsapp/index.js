@@ -4,7 +4,7 @@ import qrcode from "qrcode-terminal";
 import fs from "fs";
 import path from "path";
 import { exec } from "child_process";
-import { runAgent } from "../agent/index.js"; // tetap panggil agent kamu
+import { runAgent } from "../agent/index.js";
 
 // === Inisialisasi WhatsApp Client ===
 const client = new Client({
@@ -19,132 +19,136 @@ const client = new Client({
 const TEMP_DIR = "./temp";
 if (!fs.existsSync(TEMP_DIR)) {
   fs.mkdirSync(TEMP_DIR);
-  console.log("📁 Direktori temp dibuat:", TEMP_DIR);
 }
 
-// === Tampilkan QR Code di terminal ===
+// === Fungsi cek apakah Direct Message ===
+const isDirectMessage = (message) => {
+  // Filter lengkap untuk HANYA DM
+  return (
+    !message.fromMe && // Bukan dari diri sendiri
+    !message.isGroupMsg && // Bukan grup biasa
+    !message.broadcast && // Bukan broadcast
+    !message.isStatus && // Bukan status
+    !message.from.includes("@g.us") && // Grup & Community
+    !message.from.includes("@s.whatsapp.net")
+  ); // Status reply
+};
+
+// === Tampilkan QR Code ===
 client.on("qr", (qr) => {
   console.log("📱 Scan QR Code di bawah ini:");
   qrcode.generate(qr, { small: true });
 });
 
-// === Jika koneksi siap ===
+// === Koneksi siap ===
 client.on("ready", () => {
-  console.log("✅ WhatsApp AI Agent siap digunakan!");
+  console.log("✅ WhatsApp AI Agent siap (HANYA DM)!");
 });
 
-// === Fungsi untuk cleanup file ===
+// === Fungsi cleanup ===
 const deleteFile = (filePath) => {
   fs.unlink(filePath, (err) => {
-    if (err && err.code !== "ENOENT") {
-      console.error("Gagal hapus file:", filePath, err);
-    }
+    if (err && err.code !== "ENOENT")
+      console.error("Gagal hapus file:", filePath);
   });
 };
 
-// === Saat menerima pesan ===
+// === PESAN MASUK ===
 client.on("message", async (message) => {
-  // Abaikan pesan dari diri sendiri, grup, atau broadcast
-  if (message.fromMe || message.isGroupMsg || message.broadcast) return;
+  // ✅ FILTER DM SAJA
+  if (!isDirectMessage(message)) {
+    // Debug opsional
+    if (process.env.DEBUG === "true") {
+      console.log(`⏭️  Diabaikan: ${message.from} [${message.type}]`);
+    }
+    return;
+  }
 
   const from = message.from;
   const type = message.type;
   const body = message.body;
 
-  console.log(`📩 Pesan dari ${from}: [${type}] ${body || "[media]"}`);
+  console.log(`📩 DM dari ${from}: [${type}] ${body || "[media]"}`);
 
   try {
-    // ====== 1. Jika pesan berupa GAMBAR ======
+    // ====== 1. GAMBAR ======
     if (type === "image") {
       let media;
       try {
         media = await message.downloadMedia();
       } catch (dlErr) {
         console.error("Gagal download media:", dlErr);
-        await message.reply("Gagal mengunduh gambar. Coba lagi.");
+        await message.reply("Gagal mengunduh gambar.");
         return;
       }
 
-      if (!media || !media.data) {
+      if (!media?.data) {
         await message.reply("Gambar tidak valid.");
         return;
       }
 
       const imagePath = path.join(TEMP_DIR, `img_${Date.now()}.jpg`);
-
-      // PERBAIKAN: Simpan sebagai Buffer, bukan string base64
       const buffer = Buffer.from(media.data, "base64");
       fs.writeFileSync(imagePath, buffer);
 
-      console.log("Gambar disimpan:", imagePath);
+      console.log("🖼️  Gambar disimpan:", imagePath);
 
-      // Jalankan Tesseract OCR
-      const ocrCommand = `tesseract "${imagePath}" stdout -l eng+ind`; // dukung Inggris & Indonesia
-      console.log("Menjalankan OCR:", ocrCommand);
-
+      const ocrCommand = `tesseract "${imagePath}" stdout -l eng+ind`;
       exec(ocrCommand, async (err, stdout, stderr) => {
-        // Hapus file setelah OCR selesai (baik sukses/gagal)
         deleteFile(imagePath);
 
         if (err) {
-          console.error("OCR gagal (exec error):", err.message);
-          console.error("Stderr:", stderr);
-          await message.reply(
-            "Gagal membaca teks dari gambar.\n" +
-              "Pastikan Tesseract OCR sudah terinstal: https://github.com/tesseract-ocr/tesseract"
-          );
+          console.error("OCR error:", err.message, stderr);
+          await message.reply("Gagal membaca teks dari gambar.");
           return;
         }
 
         const extractedText = stdout.trim();
-
         if (!extractedText) {
           await message.reply("Tidak ada teks yang terbaca dari gambar.");
           return;
         }
 
-        await message.reply(`Teks dari gambar:\n\`\`\`${extractedText}\`\`\``);
+        console.log(
+          "📝 Teks terbaca:",
+          extractedText.substring(0, 100) + "..."
+        );
 
-        // Kirim ke AI Agent
+        await message.reply(
+          `📖 Teks dari gambar:\n\`\`\`${extractedText}\`\`\``
+        );
+
         try {
-          console.log("Mengirim ke AI Agent...");
           const aiReply = await runAgent(extractedText);
-          await message.reply(`Jawaban:\n${aiReply}`);
+          await message.reply(`💡 Jawaban:\n${aiReply}`);
         } catch (agentErr) {
-          console.error("AI Agent error:", agentErr);
-          await message.reply("Gagal mendapatkan jawaban dari AI. Coba lagi.");
+          console.error("AI error:", agentErr);
+          await message.reply("Gagal memproses jawaban AI.");
         }
       });
 
-      return; // hentikan eksekusi untuk pesan teks
+      return;
     }
 
-    // ====== 2. Jika pesan berupa TEKS ======
+    // ====== 2. TEKS ======
     if (type === "chat" && body) {
-      console.log("Mengirim ke AI Agent:", body);
+      console.log("💬 Memproses teks:", body.substring(0, 50) + "...");
       const aiReply = await runAgent(body);
       await message.reply(aiReply);
     }
   } catch (error) {
-    console.error("Error tak terduga:", error);
+    console.error("Error:", error);
     try {
-      await message.reply("Terjadi kesalahan internal. Coba lagi nanti.");
-    } catch (replyErr) {
-      console.error("Gagal kirim pesan error:", replyErr);
-    }
+      await message.reply("Terjadi kesalahan. Coba lagi.");
+    } catch {}
   }
 });
 
-// === Error handling global ===
-client.on("auth_failure", (msg) => {
-  console.error("Auth gagal:", msg);
-});
-
+// === Error handling ===
+client.on("auth_failure", (msg) => console.error("Auth gagal:", msg));
 client.on("disconnected", (reason) => {
-  console.log("Terputus dari WhatsApp:", reason);
-  // Otomatis reconnect
+  console.log("Terputus:", reason);
   client.initialize();
 });
 
-// === Mulai client ===
 client.initialize();
