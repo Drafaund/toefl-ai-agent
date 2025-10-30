@@ -33,6 +33,7 @@ const isDirectMessage = (message) => {
     !message.from.includes("@s.whatsapp.net")
   ); // Status reply
 };
+export { isDirectMessage };
 
 // === Tampilkan QR Code ===
 client.on("qr", (qr) => {
