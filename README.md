@@ -147,6 +147,11 @@ tests/
 └── whatsapp.test.js # Test untuk WhatsApp helpers
 ```
 
+## 📜 Lampiran
+- Link Notion: https://debonair-report-549.notion.site/AI-Agent-TOEFL-Grammar-Tutor-Berbasis-LLM-dan-WhatsApp-Integration-29b009306b7a80f1b58ad69167fbe5f3?source=copy_link
+- Link Presemtasi: https://drive.google.com/file/d/1_hU1NM1gHOG8b1XL4qYr0V0MW1Dvqeyv/view?usp=sharing
+- Link Demo: https://drive.google.com/file/d/1lr5Z7UXjNJ50eW-3eP9uyexBHnEkQAEd/view
+
 ## 📝 License
 
 MIT License © 2025 — Tim TOEFL Agent
