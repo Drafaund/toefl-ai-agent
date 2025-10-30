@@ -1,43 +1,31 @@
 {
   "name": "toefl-ai-agent",
   "version": "1.1.0",
-  "description": "AI Agent interaktif untuk latihan TOEFL Grammar menggunakan Groq, LangChain, dan WhatsApp Web.js",
+  "description": "AI Agent interaktif untuk latihan TOEFL Grammar menggunakan Groq dan WhatsApp Web.js",
   "main": "src/whatsapp/index.js",
   "type": "module",
   "scripts": {
     "start": "node src/whatsapp/index.js",
     "dev": "nodemon src/whatsapp/index.js",
     "agent": "node src/agent/index.js",
-    "server": "node src/server.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.js --runInBand --verbose",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
   "keywords": [
     "AI Agent",
-    "LangChain",
     "Groq",
     "WhatsApp",
     "TOEFL",
     "Chatbot",
-    "RAG",
     "Node.js"
   ],
   "author": "Tim TOEFL Agent",
   "license": "MIT",
   "dependencies": {
-    "@langchain/community": "^0.0.47",
-    "@langchain/core": "^1.0.2",
-    "@langchain/groq": "^1.0.0",
-    "chalk": "^5.3.0",
     "dotenv": "^16.3.1",
-    "express": "^4.19.2",
-    "faiss-node": "^0.5.1",
-    "langchain": "^0.2.17",
-    "node-fetch": "^3.3.2",
-    "openai": "^4.0.0",
+    "groq-sdk": "^0.5.0",
     "qrcode-terminal": "^0.12.0",
-    "tesseract.js": "^6.0.1",
     "whatsapp-web.js": "^1.24.0"
   },
   "devDependencies": {
