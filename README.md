@@ -53,10 +53,9 @@ Menggabungkan **Groq** dengan **integrasi WhatsApp** memberi solusi yang dapat d
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
 | **Node.js**                    | Runtime utama untuk menjalankan server chatbot dan agent secara asynchronous serta menangani integrasi antar modul. |
 | **whatsapp-web.js**            | Library untuk otomatisasi WhatsApp Web — menghubungkan chatbot dengan akun WhatsApp pengguna.                       |
-| **Groq API (@langchain/groq)** | Model bahasa yang digunakan untuk menghasilkan soal, memberikan penilaian, dan menjelaskan jawaban TOEFL.           |
+| **Groq API**                   | Model bahasa yang digunakan untuk menghasilkan soal, memberikan penilaian, dan menjelaskan jawaban TOEFL.           |
 | **Tesseract.js**               | Engine OCR untuk mengekstraksi teks dari gambar soal yang dikirim pengguna melalui WhatsApp.                        |
 | **Jest**                       | Framework testing untuk memastikan fungsi AI dan WhatsApp berjalan sesuai ekspektasi tanpa error.                   |
-| **dotenv**                     | Mengelola konfigurasi kunci API dan variabel lingkungan dengan aman melalui file `.env`.                            |
 | **qrcode-terminal**            | Menampilkan QR Code di terminal untuk otentikasi WhatsApp Web pertama kali.                                         |
 
 ---
