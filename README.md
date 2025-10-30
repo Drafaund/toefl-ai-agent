@@ -78,8 +78,7 @@ Menggabungkan **Groq** dengan **integrasi WhatsApp** memberi solusi yang dapat d
 
 ### Aliran Data
 
-
-<img width="1358" height="1611" alt="Flowchart-diagram" src="https://github.com/user-attachments/assets/c3c9b4bb-92eb-4b46-aaa7-663f4b52ed7b" />
+![Uploading Flowchart-diagram.drawio-2.png…]()
 
 ## 🚀 Fitur Utama
 
