@@ -3,12 +3,21 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const client = new Groq({
+let client = new Groq({
   apiKey: process.env.GROQ_API_KEY,
 });
 
 // --- 🧠 Memory sederhana untuk simpan percakapan ---
 let conversationHistory = [];
+
+// Export helper agar tests bisa memasang mock client / reset history
+export function setClient(newClient) {
+  client = newClient;
+}
+
+export function resetConversation() {
+  conversationHistory = [];
+}
 
 // --- Fungsi utama untuk panggil Groq Chat API ---
 export async function runAgent(userMessage) {

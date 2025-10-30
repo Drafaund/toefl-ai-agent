@@ -9,7 +9,7 @@
     "dev": "nodemon src/whatsapp/index.js",
     "agent": "node src/agent/index.js",
     "server": "node src/server.js",
-    "test": "jest --runInBand --verbose",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.config.js --runInBand --verbose",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
@@ -53,15 +53,5 @@
   },
   "engines": {
     "node": ">=18.0.0"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "moduleFileExtensions": [
-      "js",
-      "json"
-    ],
-    "roots": [
-      "<rootDir>/tests"
-    ]
   }
 }
