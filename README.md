@@ -1,7 +1,7 @@
-# 🧠 TOEFL AI Agent (Groq + LangChain + WhatsApp)
+# 🧠 TOEFL AI Agent (Groq + WhatsApp)
 
 Agen AI interaktif yang membantu pengguna berlatih **TOEFL Grammar** melalui percakapan WhatsApp.  
-Dibangun menggunakan **Groq API**, **LangChain**, dan **whatsapp-web.js**, serta dilengkapi **OCR (Optical Character Recognition)** menggunakan **Tesseract** untuk membaca soal dari gambar.
+Dibangun menggunakan **Groq API** dan **whatsapp-web.js**, serta dilengkapi **OCR (Optical Character Recognition)** menggunakan **Tesseract** untuk membaca soal dari gambar.
 
 ---
 
