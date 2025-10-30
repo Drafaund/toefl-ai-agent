@@ -78,11 +78,8 @@ Menggabungkan **Groq** dengan **integrasi WhatsApp** memberi solusi yang dapat d
 
 ### Aliran Data
 
-1. User mengirim pesan via WhatsApp
-2. Module WhatsApp menerima event, filter DM
-3. Pesan diteruskan ke Agent (runAgent)
-4. Agent memanggil Groq API dengan context
-5. Balasan dikirim kembali via WhatsApp
+
+<img width="1358" height="1611" alt="Flowchart-diagram" src="https://github.com/user-attachments/assets/c3c9b4bb-92eb-4b46-aaa7-663f4b52ed7b" />
 
 ## 🚀 Fitur Utama
 
