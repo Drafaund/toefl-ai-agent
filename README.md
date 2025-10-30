@@ -78,15 +78,8 @@ Menggabungkan **Groq** dengan **integrasi WhatsApp** memberi solusi yang dapat d
 
 ### Aliran Data
 
-![Uploading Flowchart-diagram.drawio-2.png…]()
+<img width="1358" height="1611" alt="Flowchart-diagram drawio-2" src="https://github.com/user-attachments/assets/cd5a6fe4-d205-421e-af9c-6cbdc858523f" />
 
-## 🚀 Fitur Utama
-
-- 🔤 Memberikan soal grammar TOEFL acak.
-- ✅ Memeriksa jawaban pengguna dan memberikan penjelasan singkat.
-- 💬 Dapat digunakan langsung lewat WhatsApp Chatbot.
-- 📈 Menyimpan log percakapan untuk analisis.
-- 🧪 Unit testing untuk memastikan kualitas kode
 
 ## ⚙️ Setup & Installation
 
