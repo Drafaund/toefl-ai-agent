@@ -1,7 +1,7 @@
-# 🧠 TOEFL AI Agent (Groq + LangChain + WhatsApp)
+# 🧠 TOEFL AI Agent (Groq + WhatsApp)
 
 Agen AI interaktif yang membantu pengguna berlatih **TOEFL Grammar** melalui percakapan WhatsApp.  
-Dibangun menggunakan **Groq API**, **LangChain**, dan **whatsapp-web.js**, serta dilengkapi **OCR (Optical Character Recognition)** menggunakan **Tesseract** untuk membaca soal dari gambar.
+Dibangun menggunakan **Groq API** dan **whatsapp-web.js**, serta dilengkapi **OCR (Optical Character Recognition)** menggunakan **Tesseract** untuk membaca soal dari gambar.
 
 ---
 
@@ -78,19 +78,8 @@ Menggabungkan **Groq** dengan **integrasi WhatsApp** memberi solusi yang dapat d
 
 ### Aliran Data
 
-1. User mengirim pesan via WhatsApp
-2. Module WhatsApp menerima event, filter DM
-3. Pesan diteruskan ke Agent (runAgent)
-4. Agent memanggil Groq API dengan context
-5. Balasan dikirim kembali via WhatsApp
+<img width="1358" height="1611" alt="Flowchart-diagram drawio-2" src="https://github.com/user-attachments/assets/cd5a6fe4-d205-421e-af9c-6cbdc858523f" />
 
-## 🚀 Fitur Utama
-
-- 🔤 Memberikan soal grammar TOEFL acak.
-- ✅ Memeriksa jawaban pengguna dan memberikan penjelasan singkat.
-- 💬 Dapat digunakan langsung lewat WhatsApp Chatbot.
-- 📈 Menyimpan log percakapan untuk analisis.
-- 🧪 Unit testing untuk memastikan kualitas kode
 
 ## ⚙️ Setup & Installation
 
@@ -157,6 +146,11 @@ tests/
 ├── agent.test.js    # Test untuk Agent/LLM
 └── whatsapp.test.js # Test untuk WhatsApp helpers
 ```
+
+## 📜 Lampiran
+- Link Notion: https://debonair-report-549.notion.site/AI-Agent-TOEFL-Grammar-Tutor-Berbasis-LLM-dan-WhatsApp-Integration-29b009306b7a80f1b58ad69167fbe5f3?source=copy_link
+- Link Presemtasi: https://drive.google.com/file/d/1_hU1NM1gHOG8b1XL4qYr0V0MW1Dvqeyv/view?usp=sharing
+- Link Demo: https://drive.google.com/file/d/1lr5Z7UXjNJ50eW-3eP9uyexBHnEkQAEd/view
 
 ## 📝 License
 
